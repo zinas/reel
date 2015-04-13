@@ -22,15 +22,19 @@ var Slide = React.createClass({
       }
     }).bind(this));
   },
+  _getEmptyBlock: function () {
+    var block = new BlockModel();
+    block.value = 'Enter your text...';
+    block.position.top = 40;
+    block.position.left = 150;
+
+    return block;
+  },
   _getEmptySlide: function () {
     // Create an empty slide. The initial slide should be presented
     // in edit mode, before the user has editted anything
     var slide = new SlideModel();
-    var block = new BlockModel();
-    block.value = 'Slide text goes here...';
-    block.position.top = 50;
-    block.position.left = 50;
-    slide.addBlock(block);
+    slide.addBlock(this._getEmptyBlock());
 
     return slide;
   },
@@ -49,15 +53,20 @@ var Slide = React.createClass({
     this.state.slide.removeBlock(block).save();
   },
   updateBlock: function (block) {
-    console.log('updating... ', block, this.state.slide);
     return this.state.slide.updateBlock(block).save();
+  },
+  addBlock: function (block) {
+    var slide = this.state.slide;
+    return slide.addBlock(this._getEmptyBlock()).save().then((function () {
+      this.setState({slide: slide});
+    }).bind(this));
   },
   render: function() {
     var classString = "slide " + (this.props.editmode?'slide--editmode':'');
 
     return (
       <div className={classString}>
-        <Controls editmode={this.props.editmode} />
+        <Controls editmode={this.props.editmode} onAddText={this.addBlock}/>
         {this.state.slide.blocks.map( (function (block, i) {
           return <Block key={block.id} model={block} editmode={this.props.editmode} onChange={this.updateBlock} onRemove={this.removeBlock} />;
         }).bind(this) )}
