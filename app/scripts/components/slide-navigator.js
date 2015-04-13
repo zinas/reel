@@ -54,8 +54,7 @@ var SlideNavigator = React.createClass({
   addSlide: function () {
     Router.go({
       id: 'slide',
-      params: {id: this.state.totalSlides + 1},
-      query: {editmode: !this.props.editmode}
+      params: {id: this.state.totalSlides + 1}
     });
   },
   render: function() {

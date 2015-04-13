@@ -1,7 +1,6 @@
 'use strict';
 
 var React = require('react');
-var Database = require('../core/database');
 var Slide = require('../components/slide');
 var SlideNavigator = require('../components/slide-navigator');
 
@@ -19,9 +18,7 @@ SlideController.render = function (id, query) {
       </div>
     );
 
-  Database.getSlide(id-1).then(function (slide) {
-    React.render(div, mountNode);
-  });
+  React.render(div, mountNode);
 };
 
 module.exports = SlideController;

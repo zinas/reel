@@ -30,6 +30,9 @@
   line-height: 42px;
   position: relative;
   background: $white;
+
+  min-height: 42px;
+  min-width: 100px;
 }
 
 .slide__input {

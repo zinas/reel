@@ -12,6 +12,12 @@ var Controls = React.createClass({
     alert('This button is here only as an example.');
   },
 
+  deleteSlide: function () {
+    if ( confirm('Are you sure you want to delete this slide?') ) {
+      this.props.onDelete();
+    }
+  },
+
   render: function() {
     return (
       <div className="slide__controls">
@@ -23,6 +29,9 @@ var Controls = React.createClass({
         </button>
         <button onClick={this.showIncompleteAlert} className="button--branding button--block">
           <i className="fa fa-code"></i> Add code
+        </button>
+        <button onClick={this.deleteSlide} className="button--branding button--block">
+          <i className="fa fa-delete"></i> Delete slide
         </button>
       </div>
     );

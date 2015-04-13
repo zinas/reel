@@ -14,17 +14,15 @@ var Slide = React.createClass({
   _updateSlideState: function (id) {
     return SlideModel.getById(id).then((function (slide) {
       if ( slide ) {
-        console.log('found slide', slide);
         this.setState({slide: slide});
       } else {
-        console.log('empty slide')
         this.setState({slide: this._getEmptySlide()});
       }
     }).bind(this));
   },
   _getEmptyBlock: function () {
     var block = new BlockModel();
-    block.value = 'Enter your text...';
+    block.value = '';
     block.position.top = 40;
     block.position.left = 150;
 
@@ -50,10 +48,16 @@ var Slide = React.createClass({
     this._updateSlideState(nextProps.id);
   },
   removeBlock: function (block) {
-    this.state.slide.removeBlock(block).save();
+    var slide = this.state.slide;
+    return slide.removeBlock(block).save().then((function () {
+      this.setState({slide:slide});
+    }).bind(this));
   },
   updateBlock: function (block) {
-    return this.state.slide.updateBlock(block).save();
+    var slide = this.state.slide;
+    return slide.updateBlock(block).save().then((function () {
+      this.setState({slide:slide});
+    }).bind(this));
   },
   addBlock: function (block) {
     var slide = this.state.slide;
@@ -61,12 +65,15 @@ var Slide = React.createClass({
       this.setState({slide: slide});
     }).bind(this));
   },
+  handleDelete: function () {
+    alert('slide deleted');
+  },
   render: function() {
     var classString = "slide " + (this.props.editmode?'slide--editmode':'');
 
     return (
       <div className={classString}>
-        <Controls editmode={this.props.editmode} onAddText={this.addBlock}/>
+        <Controls editmode={this.props.editmode} onAddText={this.addBlock} onDelete={this.handleDelete} />
         {this.state.slide.blocks.map( (function (block, i) {
           return <Block key={block.id} model={block} editmode={this.props.editmode} onChange={this.updateBlock} onRemove={this.removeBlock} />;
         }).bind(this) )}

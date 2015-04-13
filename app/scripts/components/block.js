@@ -52,6 +52,10 @@ var Block = React.createClass({
     this.updateSlideContent();
   },
 
+  handleRemove: function (event) {
+    this.props.onRemove(this.state.model);
+  },
+
   render: function() {
     var styles = {
       top: this.state.top + 'px',
@@ -60,10 +64,10 @@ var Block = React.createClass({
 
     return (
       <div ref="wholeBlock" className="slide__block" style={styles}>
-        <div ref="handle" className="button button--branding slide__moveit"><i className="fa fa-arrows"></i></div>
-        <div className="button button--danger slide__removeit"><i className="fa fa-minus"></i></div>
+        <button ref="handle" className="button--branding slide__moveit"><i className="fa fa-arrows"></i></button>
+        <button onClick={this.handleRemove} className="button button--danger slide__removeit"><i className="fa fa-minus"></i></button>
         <div className="slide__content">{this.state.value}</div>
-        <input className="slide__input" type="text" onChange={this.handleChange} value={this.state.value} />
+        <input className="slide__input" placeholder="Enter your text..." type="text" onChange={this.handleChange} value={this.state.value} />
       </div>
     );
   }

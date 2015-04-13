@@ -31,7 +31,6 @@ Slide.prototype.removeBlock = function (block) {
 };
 
 Slide.prototype.save = function () {
-  console.log('saving slide');
   return Database.saveSlide(this).then(function (result) {
     console.log('success', result);
   }, function (result) {
