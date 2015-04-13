@@ -1,0 +1,10 @@
+html, body, #app, .wrapper {
+  height: 100%;
+}
+
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
