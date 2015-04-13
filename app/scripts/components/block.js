@@ -51,16 +51,17 @@ var Block = React.createClass({
     this.state.model.value = event.target.value;
     this.updateSlideContent();
   },
+
   render: function() {
     var styles = {
       top: this.state.top + 'px',
       left: this.state.left + 'px'
     };
-    var classString = "slide__block " + (this.props.editmode?'slide__block--editmode':'');
 
     return (
-      <div ref="wholeBlock" className={classString} style={styles}>
-        <div ref="handle" className="slide__moveit"><i className="fa fa-arrows"></i></div>
+      <div ref="wholeBlock" className="slide__block" style={styles}>
+        <div ref="handle" className="button button--branding slide__moveit"><i className="fa fa-arrows"></i></div>
+        <div className="button button--danger slide__removeit"><i className="fa fa-minus"></i></div>
         <div className="slide__content">{this.state.value}</div>
         <input className="slide__input" type="text" onChange={this.handleChange} value={this.state.value} />
       </div>

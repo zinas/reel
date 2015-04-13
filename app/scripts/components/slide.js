@@ -2,6 +2,7 @@
 
 var React = require('react');
 var Block = require('../components/block');
+var Controls = require('../components/controls');
 
 var BlockModel = require('../models/block');
 var SlideModel = require('../models/slide');
@@ -52,8 +53,11 @@ var Slide = React.createClass({
     return this.state.slide.updateBlock(block).save();
   },
   render: function() {
+    var classString = "slide " + (this.props.editmode?'slide--editmode':'');
+
     return (
-      <div className="slide">
+      <div className={classString}>
+        <Controls editmode={this.props.editmode} />
         {this.state.slide.blocks.map( (function (block, i) {
           return <Block key={block.id} model={block} editmode={this.props.editmode} onChange={this.updateBlock} onRemove={this.removeBlock} />;
         }).bind(this) )}

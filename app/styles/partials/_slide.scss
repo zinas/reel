@@ -1,7 +1,7 @@
 .slide {
   height: 100%;
   position: relative;
-  background: $background;
+  background: $white;
 }
 
 .slide__block {
@@ -10,20 +10,18 @@
 }
 
 
+.slide__moveit,
+.slide__removeit, {
+  position: absolute;
+  top: 0;
+
+  transition: top 0.1s  0.1s ease-out;
+}
 .slide__moveit {
-  cursor: move;
-  display: inline-block;
-  position:absolute;
-  top: -1px;
   left: 20px;
-  text-align: center;
-  font-size: 14px;
-  line-height: 20px;
-
-  border: 1px solid #ccc;
-  border-radius: 5px;
-
-  transition: top 0.3s  0.1s ease-out;
+}
+.slide__removeit {
+  left: 60px;
 }
 
 .slide__input,
@@ -31,24 +29,39 @@
   font-size: 36px;
   line-height: 42px;
   position: relative;
-  background: $background;
-  border-bottom: 1px solid red;
+  background: $white;
 }
 
 .slide__input {
   display: none;
-  border: 0;
-  border-bottom: 1px solid red;
+  color: $dark;
+  padding: 3px;
 }
 
-.slide__block--editmode {
+.slide--editmode {
   .slide__input {
     display: inline;
   }
-  .slide__moveit {
-    top: -18px;
+  .slide__moveit,
+  .slide__removeit {
+    top: -34px;
   }
   .slide__content {
     display: none;
   }
+
+  .slide__controls {
+    opacity: 1;
+  }
+}
+
+.slide__controls {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 110px;
+
+  opacity: 0;
+
+  transition: opacity 0.2s ease-out;
 }

@@ -51,7 +51,7 @@ var SlideNavigator = React.createClass({
       query: {editmode: !this.props.editmode}
     });
   },
-  add: function () {
+  addSlide: function () {
     Router.go({
       id: 'slide',
       params: {id: this.state.totalSlides + 1},
@@ -60,30 +60,38 @@ var SlideNavigator = React.createClass({
   },
   render: function() {
     return (
-      <div className="navigation">
-        <button
-          onClick={this.previous}
-          disabled={!this.state.hasPrevious}
-          className="navigation__button navigation__button--previous">
-            Previous
-        </button>
-        <button
-          onClick={this.next}
-          disabled={!this.state.hasNext}
-          className="navigation__button navigation__button--next">
-            Next
-        </button>
-        <button
-          onClick={this.edit}
-          className="navigation__button navigation__button--editmode">
-            Edit
-        </button>
-        <button
-          onClick={this.add}
-          className="navigation__button navigation__button--add">
-            Add new
-        </button>
-      </div>
+      <ul className="nav">
+        <li className="nav__item">
+          <button
+            onClick={this.previous}
+            disabled={!this.state.hasPrevious}
+            className="button--branding">
+              <i className="fa fa-arrow-left"></i> Previous
+          </button>
+        </li>
+        <li className="nav__item">
+          <button
+            onClick={this.next}
+            disabled={!this.state.hasNext}
+            className="button--branding">
+              Next <i className="fa fa-arrow-right"></i>
+          </button>
+        </li>
+        <li className="nav__item">
+          <button
+            onClick={this.edit}
+            className="button--branding">
+              <i className="fa fa-pencil"></i> Toggle Edit Mode
+          </button>
+        </li>
+        <li className="nav__item">
+          <button
+            onClick={this.addSlide}
+            className="button--branding">
+              <i className="fa fa-plus"></i> New Slide
+          </button>
+        </li>
+      </ul>
     );
   }
 });

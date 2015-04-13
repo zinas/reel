@@ -1,0 +1,55 @@
+.button,
+button,
+input[type=button] {
+  border: 0;
+  border-radius: 2px;
+  color: $white;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 20px;
+  padding: 7px 10px;
+  text-transform: none;
+  transition: all 0.3s ease 0s;
+  -moz-transition: all 0.3s ease 0s;
+  -webkit-transition: all 0.3s ease 0s;
+  text-align: center; /* DELETE WHEN WIDTH AUTO */
+
+  &[disabled] {
+    opacity: 0.4;
+  }
+}
+
+.button--block {
+  display: block;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.button--branding {
+  background: none repeat scroll 0 0 $branding;
+  color: $brandingContrast;
+  &:hover {
+    background: none repeat scroll 0 0 $reverse;
+    color: $reverseContrast;
+  }
+}
+
+.button--danger {
+  background: none repeat scroll 0 0 $danger;
+  color: $dangerContrast;
+  &:hover {
+    background: none repeat scroll 0 0 $reverse;
+    color: $reverseContrast;
+  }
+}
+
+.button--reverse {
+  background: none repeat scroll 0 0 $reverse;
+  color: $reverseContrast;
+  &:hover {
+    background: none repeat scroll 0 0 $branding;
+    color: $brandingContrast;
+  }
+}
