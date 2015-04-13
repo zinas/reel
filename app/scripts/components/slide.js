@@ -66,7 +66,10 @@ var Slide = React.createClass({
     }).bind(this));
   },
   handleDelete: function () {
-    alert('slide deleted');
+    var slide = this.state.slide;
+    slide.remove().then((function () {
+      this._updateSlideState(this.props.id);
+    }).bind(this));
   },
   render: function() {
     var classString = "slide " + (this.props.editmode?'slide--editmode':'');

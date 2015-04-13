@@ -30,8 +30,8 @@ var Controls = React.createClass({
         <button onClick={this.showIncompleteAlert} className="button--branding button--block">
           <i className="fa fa-code"></i> Add code
         </button>
-        <button onClick={this.deleteSlide} className="button--branding button--block">
-          <i className="fa fa-delete"></i> Delete slide
+        <button onClick={this.deleteSlide} className="button--danger button--block">
+          <i className="fa fa-trash-o"></i> Delete slide
         </button>
       </div>
     );
