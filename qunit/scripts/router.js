@@ -1,3 +1,14 @@
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+var Router = require('../../app/scripts/core/router');
+
+console.log('router', Router);
+
+QUnit.test( "test example for router", function( assert ) {
+  var value = "hello";
+  assert.equal( value, "hello", "We expect value to be hello" );
+});
+
+},{"../../app/scripts/core/router":2}],2:[function(require,module,exports){
 'use strict';
 
 var Router = {};
@@ -10,7 +21,6 @@ Router._current = {
   params: [],
   query: {}
 };
-Router.atFallback = false;
 
 Router.addRoute = function(route) {
   var path, params = [];
@@ -71,12 +81,7 @@ Router.go = function (obj, replace) {
 };
 
 Router.goToFallback = function () {
-  if ( !this.atFallback ) {
-    this.atFallback = true;
-    this.go(this._fallback, true);
-  } else {
-    console.warn('Already at fallback. Escaping infinite loop');
-  }
+  this.go(this._fallback, true);
 }
 
 Router.parseUrl = function (url) {
@@ -151,9 +156,6 @@ Router.executeRoute = function (route) {
   this._current.page = route.page;
   this._current.params = this._current.fullpath.replace(route.page + '/', '').split('/');
 
-  // Route resolved, so we can reset this flag
-  this.atFallback = false;
-
   var parameters = this._current.params;
   parameters.push(this._current.query);
   route.resolve.apply(route.resolve, parameters);
@@ -174,3 +176,5 @@ window.addEventListener('popstate', (function(event) {
 
 
 module.exports = Router;
+
+},{}]},{},[1]);

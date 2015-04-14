@@ -12,11 +12,11 @@ var $ = require('gulp-load-plugins')();
 var browserify = require('browserify');
 var watchify = require('watchify');
 var sourcemaps = require('gulp-sourcemaps');
+var qunit = require('gulp-qunit');
+var transform = require('vinyl-transform');
+
 var source = require('vinyl-source-stream'),
-
-
     sourceFile = './app/scripts/app.js',
-
     destFolder = './dist/scripts',
     destFileName = 'app.js';
 
@@ -76,8 +76,13 @@ gulp.task('buildScripts', function() {
         .pipe(gulp.dest('dist/scripts'));
 });
 
+gulp.task('buildTestScripts', function() {
 
-
+    return browserify('./qunit/tests/tests.js')
+        .bundle()
+        .pipe(source('tests.js'))
+        .pipe(gulp.dest('./qunit/scripts'));
+});
 
 // HTML
 gulp.task('html', function() {
@@ -186,6 +191,18 @@ gulp.task('build', ['html', 'buildBundle', 'images', 'fonts', 'extras'], functio
         .pipe($.uglify())
         .pipe($.stripDebug())
         .pipe(gulp.dest('dist/scripts'));
+});
+
+gulp.task('test', ['buildTestScripts'], function() {
+        browserSync({
+        notify: false,
+        logPrefix: 'BS',
+        // Run as an https by uncommenting 'https: true'
+        // Note: this uses an unsigned certificate which on first access
+        //       will present a certificate warning in the browser.
+        // https: true,
+        server: ['qunit']
+    });
 });
 
 // Default task

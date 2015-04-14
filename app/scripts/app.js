@@ -4,9 +4,7 @@ Router
   .addRoute({
     id: 'slide',
     when: '/slides/:id',
-    resolve: function (id, query) {
-      require('./controllers/slide').render(id, query);
-    }
+    resolve: require('./controllers/slide').render
   })
   // Just a testing route to fill the db with some slides
   .addRoute({
