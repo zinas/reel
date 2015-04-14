@@ -110,3 +110,17 @@ Slide.getById(3).then(function (slide) {
     });
 });
 ```
+### Styling
+Styling was kept to a minimum, just enough to support the whole exercise. I am a big fan of a BEM/OOCSS approach, and in the codebase I put some comments to indicate how that would be split up. The styles I wrote for this though were not enough to demonstrate it properly. Ideally, I would want to have typography defined, a grid system, a set of mixins to enhance DRY-ness of the code etc.
+
+### Unit testing
+I wanted to try out some BDD using karma/jasmine, but I had some problem with windows and couldn't get the node modules to install. I went with TDD (not that it makes much of a difference) and QUnit. To see the test results you have to run from the command line: gulp test.
+
+Tests for now are only supported for Router. 
+
+## Known issues and potential improvements
+The following list are things that I would love to improve, but might be out of scope for an exercise evalution. I can make them work if needed.
+
+- gulpfile.js cleanup. The file created from the generator isn't that clean and mulptiple improvements can be done, both when it comes to tasks and tidyness of the code
+- unit test live reloading and rebundling
+- moving blocks around happens using pixels. This means that if you change window size/resolution the position of blocks looks broken
