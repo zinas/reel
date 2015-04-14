@@ -4,7 +4,17 @@ var React = require('react');
 var Utils = require('../core/utils');
 var Drag = require('../vendor/dom-drag/dom-drag');
 
+/**
+ * Component for one part of the slide. A block can be text, image, code snippet etc.
+ * For now, only the text implementation has been done.
+ *
+ * A block can be editted, moved around and deleted
+ */
 var Block = React.createClass({
+  /**
+   * Setup drag n drop functionality
+   * @return {null}
+   */
   _setupDnD: function () {
       var
         handle = React.findDOMNode(this.refs.handle),

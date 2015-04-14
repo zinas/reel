@@ -9,8 +9,13 @@ var SlideModel = require('../models/slide');
 
 var Database = require('../core/database');
 
+/**
+ * Component for rendering a single slide. Also rendering other components
+ * for the controls and for every single one of the blocks
+ */
 var Slide = React.createClass({
 
+  // Slide data exist in the state, since the change ofter. Slide id is a property
   _updateSlideState: function (id) {
     return SlideModel.getById(id).then((function (slide) {
       if ( slide ) {

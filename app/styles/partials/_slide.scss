@@ -1,3 +1,6 @@
+/**
+ * Slide specific styles.
+ */
 .slide {
   height: 100%;
   position: relative;
@@ -8,7 +11,6 @@
   position: absolute;
   max-width: 75%;
 }
-
 
 .slide__moveit,
 .slide__removeit, {
@@ -41,6 +43,26 @@
   padding: 3px;
 }
 
+.slide__controls {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 110px;
+
+  opacity: 0;
+
+  transition: opacity 0.2s ease-out;
+}
+
+/**
+ * According to BEM standards, normally this should have been:
+ * .slide__input--editmode instead of .slide--editmode .slide__input
+ *
+ * Although that is generally correct, I don't follow this approach when
+ * working with states, because it is safer to change the state in only only place
+ * in the markup. ie. it's better to only worry about adding/removing one class called
+ * slide--editmode, than having to handle many at once (slide__moveit--editmode, slide__input--editmode etc.)
+ */
 .slide--editmode {
   .slide__input {
     display: inline;
@@ -56,15 +78,4 @@
   .slide__controls {
     opacity: 1;
   }
-}
-
-.slide__controls {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  width: 110px;
-
-  opacity: 0;
-
-  transition: opacity 0.2s ease-out;
 }

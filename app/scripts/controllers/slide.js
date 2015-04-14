@@ -4,6 +4,10 @@ var React = require('react');
 var Slide = require('../components/slide');
 var SlideNavigator = require('../components/slide-navigator');
 
+/**
+ * Controller didn't need any logic in the end, so it only renders the initial components
+ * @type {Object}
+ */
 var SlideController = {};
 
 SlideController.render = function (id, query) {

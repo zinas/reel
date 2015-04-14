@@ -1,13 +1,34 @@
 'use strict';
 const KEY = 'reel.slides';
 
-var Database = {}, Storage = {};
+var
+ /**
+  * Simple DB substitute. Stores everything as a string in localstorage.
+  * Uses ES6 promises to return data, to mock asynchronous data
+  *
+  * @type {Object}
+  */
+  Database = {},
 
+  /**
+   * Basic wrapper over local storage
+   * @type {Object}
+   */
+  Storage = {};
+
+/**
+ * Get from localstorage
+ * @return {Object} parses the json string stored
+ */
 Storage.get = function () {
   var item = localStorage.getItem(KEY);
   return JSON.parse(item);
 };
 
+/**
+ * Save to localstorage
+ * @param {Object} value converts to string and saves
+ */
 Storage.set = function (value) {
   var item = JSON.stringify(value);
   localStorage.setItem(KEY, item);
@@ -17,6 +38,12 @@ if ( !Storage.get() ) {
   Storage.set([]);
 }
 
+/**
+ * Adds of updates a slide. This is decided based on the slide.id property
+ *
+ * @param  {Slide}   slide slide to save
+ * @return {Promise}
+ */
 Database.saveSlide = function (slide) {
   return new Promise(function (resolve, reject) {
     var slides = Storage.get(), index = -1, i;
@@ -38,6 +65,12 @@ Database.saveSlide = function (slide) {
   });
 };
 
+/**
+ * Deletes a slide. This is decided based on the slide.id property
+ *
+ * @param  {Slide}   slide slide to delete
+ * @return {Promise}
+ */
 Database.removeSlide = function (slide) {
   return new Promise(function (resolve, reject) {
     var slides = Storage.get();
@@ -49,6 +82,15 @@ Database.removeSlide = function (slide) {
   });
 };
 
+/**
+ * Returns a slide.
+ *
+ * First checks if the id is an index in the array of slides and return by slide position.
+ * If not, it tries to match against slide.id
+ *
+ * @param  {String}   id position or id of the slide
+ * @return {Promise}
+ */
 Database.getSlide = function (id) {
   return new Promise(function (resolve, reject) {
     var slides = Storage.get(), slide;
@@ -69,6 +111,10 @@ Database.getSlide = function (id) {
   });
 };
 
+/**
+ * Returns all slides
+ * @return {Promise} The parameter passed is the array of slides
+ */
 Database.getSlides = function () {
   return new Promise(function (resolve, reject) {
     resolve(Storage.get());

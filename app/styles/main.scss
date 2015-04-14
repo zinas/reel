@@ -1,3 +1,19 @@
+/**
+ * I like breaking down css in many small files. First import base framework files
+ * (like reset, mixins, variables, fonts, buttons, grid etc).
+ *
+ * Then continue with component specific styles. These should be kept to a minimum.
+ * In general, components should be easily styled with the base styles, without many overrides
+ *
+ * Finally add page specific styles, which are non-reusable. Obviously these should be even less
+ * than the component styles.
+ *
+ * I also like have a _shame.scss file where hacks are thrown into.
+ *
+ * By checking the number of lines in the last 2 sections, you can
+ * get an indication of your technical debt
+ */
+
 // Base
 @import 'partials/variables';
 @import 'partials/normalize';

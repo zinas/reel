@@ -2,6 +2,11 @@
 
 var React = require('react');
 
+/**
+ * Slide controls, only visible in edit mode
+ *
+ * They allow to add multiple blocks in the slide, or delete the slide entirely
+ */
 var Controls = React.createClass({
 
   addText: function () {

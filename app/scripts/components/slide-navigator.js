@@ -4,8 +4,12 @@ var React = require('react');
 var Database = require('../core/database');
 var Router = require('../core/router');
 
+/**
+ * Navigation for all the slides. Can go to next/previous, can toggle edit mode and create new slides
+ */
 var SlideNavigator = React.createClass({
   _updateState: function () {
+    // TODO Need to remove Database reference from component. Change to Slide.getAll()
     Database.getSlides().then((function (slides) {
       this.setState({
         hasPrevious: this.props.currentSlide > 1 ? true : false,
