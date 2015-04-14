@@ -16,6 +16,9 @@ After searching a bit which setup to use, I ended up using the react-gulp-browse
 
 Originally, there will be no slides, but you can add your own. There is also a "warmup" script, adding 3 slides. Just navigate to /#/warmup manually. If you have already added some slides, the 3 will be appended to the end.
 
+#### Browser compatibility
+Only latest Chrome
+
 ### Routing
 A custom solution was implemented for the Router. I chose to go for a singleton, which means you can only have one router per application. A brief documentation of the router follows.
 
@@ -48,4 +51,47 @@ Router.go({
 Router.current().params // [5, 1]
 Router.current().query.count // 3
 Router.current().page // /myroute
+```
+
+### Data handling
+Based on the exercise, data should persist only in the client. I chose to go with saving them in localstorage for simplicity 
+and speed of development. I like the idea of models for data and the concept of ActiveRecords, so I implemented a very simple solution like that. 
+
+Even though localstorage is synchronous, I used ES6 Promises to make it asynchronous. This, combined with the fact that the Slide ActiveRecord doesn't access the data directly but thougnt the Database singleton, makes it very simple to switch from localstorage to any other solution, including a server-side database.
+
+There is also a model for Block, but it is more of a structure to hold data, rather than anything else.
+
+#### Using the ActiveRecord
+```javascript
+var slide = new Slide();
+var block = new Block();
+block.value = "this is the slide text";
+
+// Chaining is used for ActiveRecord. Also, persistance happens only when calling save() explicitely
+slide.addBlock(block).save();
+
+var anotherBlock = new Block();
+anotherBlock.value = "other text";
+anotherBlock.position.top = 200;
+anotherBlock.position.left = 200;
+
+// save() is intelligent enough to understand between adding a slide or updating the existing one
+slide.addBlock(anotherBlock).save();
+
+// updating and removing blocks is again intelligent enough
+block.value = 'updated text';
+slide.updateBlock(block).removeBlock(anotherBlock).save();
+
+// and finally deleting the slide alltogether
+slide.remove();
+
+// Finding a slide is simple enough as well. I am using a static function for that
+Slide.getById(3).then(function (slide) {
+    // the result passed is already an active record, so the following is possible
+    var block = new Block();
+    block.value = 'some text';
+    slide.addBlock(block).save().then(function () {
+        // all done
+    });
+});
 ```
