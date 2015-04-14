@@ -124,3 +124,5 @@ The following list are things that I would love to improve, but might be out of 
 - gulpfile.js cleanup. The file created from the generator isn't that clean and mulptiple improvements can be done, both when it comes to tasks and tidyness of the code
 - unit test live reloading and rebundling
 - moving blocks around happens using pixels. This means that if you change window size/resolution the position of blocks looks broken
+- Some animation when changing slides, and also some information about the current slide and total slides
+- React Component namespacing
