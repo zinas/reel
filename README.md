@@ -19,6 +19,21 @@ Originally, there will be no slides, but you can add your own. There is also a "
 #### Browser compatibility
 Only latest Chrome
 
+### Component breakdown
+#### Block
+Block represents a piece of content that can be added in any slide. Block is intended to hold different types of data, but for the purpose of this exercise, only the text type is implemented. Ideally, more types can be added, like image, video, code snippet, rich text etc. etc.
+
+A block has a value and also a position. Which means it can be moved around in the slide, by dragging. This is only available in editmode.
+
+#### Slide
+This is the main component used. One slide is equivelant to a whole page and it can hold multiple Blocks. A slide can be in editmode, which is a state that propagates to its child components. Based on the best practices of React, this is the parent component that handles state, so that state manipulation doesn't become too spread and difficult to handle
+
+#### Controls
+Another child component of Slide. It gives you the ability to add more blocks to the specific slide and also to delete it.
+
+#### Navigator
+This is the main navigation. Next/Previous, handling the editmode flag and adding new slides. This is not slide specific, so it doesn't belong as a child of the Slide.
+
 ### Routing
 A custom solution was implemented for the Router. I chose to go for a singleton, which means you can only have one router per application. A brief documentation of the router follows.
 
