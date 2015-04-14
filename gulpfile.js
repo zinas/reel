@@ -31,8 +31,7 @@ gulp.task('sass', function() {
         .pipe($.rubySass({
             style: 'expanded',
             precision: 10,
-            loadPath: ['app/bower_components'],
-            sourcemap: true
+            loadPath: ['app/bower_components']
         }))
         .on('error', function (err) {
             console.error('Error!', err.message);
@@ -159,7 +158,7 @@ gulp.task('extras', function() {
 });
 
 // Watch
-gulp.task('watch', ['html', 'fonts', 'bundle'], function() {
+gulp.task('serve', ['html', 'fonts', 'bundle'], function() {
 
     browserSync({
         notify: false,
@@ -191,6 +190,16 @@ gulp.task('build', ['html', 'buildBundle', 'images', 'fonts', 'extras'], functio
         .pipe($.uglify())
         .pipe($.stripDebug())
         .pipe(gulp.dest('dist/scripts'));
+
+    browserSync({
+        notify: false,
+        logPrefix: 'BS',
+        // Run as an https by uncommenting 'https: true'
+        // Note: this uses an unsigned certificate which on first access
+        //       will present a certificate warning in the browser.
+        // https: true,
+        server: ['dist']
+    });
 });
 
 gulp.task('test', ['buildTestScripts'], function() {

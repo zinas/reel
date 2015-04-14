@@ -11,7 +11,6 @@
     "gulp-bower": "0.0.6",
     "gulp-cache": "~0.2.4",
     "gulp-imagemin": "latest",
-    "gulp-jest": "~0.2.2",
     "gulp-jshint": "~1.8.5",
     "gulp-load-plugins": "~0.7.0",
     "gulp-qunit": "^1.2.1",
@@ -23,7 +22,6 @@
     "gulp-useref": "~0.4.4",
     "gulp-util": "~3.0.1",
     "gulp-webserver": "latest",
-    "jest-cli": "latest",
     "main-bower-files": "~2.6.2",
     "react": "latest",
     "react-tools": "latest",
@@ -35,15 +33,6 @@
   },
   "engines": {
     "node": ">=0.10.0"
-  },
-  "scripts": {
-    "test": "jest"
-  },
-  "jest": {
-    "scriptPreprocessor": "<rootDir>/preprocessor.js",
-    "unmockedModulePathPatterns": [
-      "<rootDir>/node_modules/react"
-    ]
   },
   "browserify": {
     "transform": [
